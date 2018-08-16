@@ -12,25 +12,27 @@ if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 const createWindow = async () => {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 400,
+        height: 300,
     });
 
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-    ipcMain.on('download-files', async (event, files) => {
-        const promises = files.map(file =>
-            download(mainWindow, file.url, {
+    ipcMain.on('download-files', async (event, urls) => {
+        const files = new Set();
+        const promises = urls.map(url =>
+            download(mainWindow, url, {
                 onProgress: progress => {
-                    event.sender.send('download-progress', {progress, file});
+                    event.sender.send('download-progress', progress);
                 },
                 onStarted: downloadItem => {
-                    console.log(file.label, downloadItem.getSavePath());
+                    files.add(downloadItem.getSavePath());
                 }
             })
         );
         await Promise.all(promises);
+        console.log(files);
         event.sender.send('downloads-complete');
     });
 
