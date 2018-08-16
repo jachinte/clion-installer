@@ -1,5 +1,6 @@
 import React from 'react';
 import { ipcRenderer } from 'electron';
+import Steps from 'react-steps';
 import { Line } from 'react-progressbar.js';
 
 class Prerequisites extends React.Component {
@@ -25,6 +26,28 @@ class Prerequisites extends React.Component {
     }
 
     render(){
+        const steps = [
+            {
+                'text': 'Download required files',
+                'isActive': true,
+                'isDone': false
+            },
+            {
+                'text': 'Extract compressed files',
+                'isActive': false,
+                'isDone': false
+            },
+            {
+                'text': 'Install prerequisites',
+                'isActive': false,
+                'isDone': false
+            },
+            {
+                'text': 'Install CLion',
+                'isActive': false,
+                'isDone': false
+            }
+        ];
         const options = {
             color: '#BADA55',
             duration: 500,
@@ -49,6 +72,7 @@ class Prerequisites extends React.Component {
                     initialAnimate={true}
                     containerStyle={containerStyle}
                     containerClassName={'.progressbar'} />
+                <Steps items={steps} type={'point'} flat={true}/>
             </div>
         );
     }
