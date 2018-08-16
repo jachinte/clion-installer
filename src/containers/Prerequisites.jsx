@@ -1,5 +1,6 @@
 import React from 'react';
 import { ipcRenderer } from 'electron';
+import { Line } from 'react-progressbar.js';
 
 class Prerequisites extends React.Component {
     constructor(props) {
@@ -24,12 +25,30 @@ class Prerequisites extends React.Component {
     }
 
     render(){
+        const options = {
+            color: '#BADA55',
+            duration: 500,
+            strokeWidth: 3,
+            trailColor: '#eee',
+            trailWidth: 0.5,
+        };
+        const containerStyle = {
+            width: '90%',
+            height: '60px',
+            margin: 'auto',
+        };
+        const format = (n) => parseFloat(Math.round(n * 100) / 100).toFixed(2);
         return (
             <div>
                 <h1>Hi there!</h1>
                 <h2>Please wait until we download some files...</h2>
-                <hr />
-                <b>Progress: {this.state.progress}</b>
+                <Line
+                    progress={this.state.progress}
+                    text={`${format(this.state.progress * 100)}%`}
+                    options={options}
+                    initialAnimate={true}
+                    containerStyle={containerStyle}
+                    containerClassName={'.progressbar'} />
             </div>
         );
     }
