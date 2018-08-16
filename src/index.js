@@ -1,4 +1,4 @@
-import { app, ipcMain, BrowserWindow } from 'electron';
+import { app, shell, ipcMain, BrowserWindow } from 'electron';
 import { enableLiveReload } from 'electron-compile';
 import { download } from 'electron-dl';
 
@@ -12,28 +12,32 @@ if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 const createWindow = async () => {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 600,
+        width: 720,
         height: 400,
     });
 
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-    ipcMain.on('download-files', async (event, urls) => {
-        const files = new Set();
-        const promises = urls.map(url =>
-            download(mainWindow, url, {
+    ipcMain.on('download-files', async (event, files) => {
+        const paths = new Set();
+        const promises = files.map(file =>
+            download(mainWindow, file.url, {
                 onProgress: progress => {
-                    event.sender.send('download-progress', progress);
+                    event.sender.send('download-progress', {progress, file});
                 },
                 onStarted: downloadItem => {
-                    files.add(downloadItem.getSavePath());
+                    paths.add(downloadItem.getSavePath());
                 }
             })
         );
         await Promise.all(promises);
-        console.log(files);
-        event.sender.send('downloads-complete');
+        event.sender.send('download-complete');
+    });
+
+    mainWindow.webContents.on('new-window', (event, url) => {
+        event.preventDefault();
+        shell.openExternal(url);
     });
 
     // Emitted when the window is closed.
