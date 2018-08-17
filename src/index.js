@@ -12,9 +12,14 @@ if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 const createWindow = async() => {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 720,
+        icon: `${__dirname}/icons/ico/icon256x256.ico`,
+        fullscreen: false,
+        fullscreenable: false,
         height: 400,
+        maximizable: false,
+        resizable: false,
         title: 'CLion 2018 Installation - University of Victoria',
+        width: 720,
     });
     mainWindow.setFullScreenable(false);
     mainWindow.setResizable(false);
