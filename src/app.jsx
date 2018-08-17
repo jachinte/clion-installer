@@ -4,6 +4,7 @@ import Main from './containers/Main.jsx';
 import Welcome from './containers/Welcome.jsx';
 import Download from './containers/Download.jsx';
 import Extraction from './containers/Extraction.jsx';
+import Execution from './containers/Execution.jsx';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -18,6 +19,7 @@ export default class App extends React.Component {
                     <Route exact path="/" component={ Welcome }/>
                     <Route path="/download" component={ Download }/>
                     <Route path="/extraction" component={ Extraction }/>
+                    <Route path="/execution" component={ Execution }/>
                 </Main>
             </HashRouter>
         );

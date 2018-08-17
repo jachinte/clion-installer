@@ -25,14 +25,21 @@ const createWindow = async () => {
             download(mainWindow, file.url, {
                 onProgress: progress => {
                     event.sender.send('download-progress', {progress, file});
+                    if (progress >= 1) {
+                        // TODO await not working
+                        event.sender.send('download-complete', [...paths]);
+                    }
                 },
                 onStarted: downloadItem => {
                     paths.add(downloadItem.getSavePath());
                 }
             })
         );
-        await Promise.all(promises);
-        event.sender.send('download-complete');
+        try {
+            await Promise.all(promises);
+        } catch (error) {
+            event.sender.send('download-error', error);
+        }
     });
 
     mainWindow.webContents.on('new-window', (event, url) => {
