@@ -29,6 +29,7 @@
         ]
       },
       "electronPackagerConfig": {
+      	"icon": "src/icons/icns/icon128x128.icns",
         "packageManager": "npm"
       },
       "electronWinstallerConfig": {
