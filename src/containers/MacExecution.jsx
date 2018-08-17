@@ -5,13 +5,13 @@ import { loadTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
 
 const styles = {
     angle: {
-        backgroundColor: '#e81123',
+        backgroundColor: '#0078d4',
     },
     button: {
         float: 'right',
     },
     header: {
-        backgroundColor: '#e81123',
+        backgroundColor: '#0078d4',
         color: 'white',
     },
     link: {
@@ -27,7 +27,7 @@ const styles = {
     },
 };
 
-class Execution extends React.Component {
+class MacExecution extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +37,7 @@ class Execution extends React.Component {
         };
         loadTheme({
             palette: {
-                'themePrimary': '#e81123'
+                'themePrimary': '#0078d4'
             }
         });
     }
@@ -59,7 +59,6 @@ class Execution extends React.Component {
                 </MessageBar>
             );
         } else {
-            const progress = this.state.progress ? (this.state.progress * 100).toFixed(0) : 0;
             component = (
                 <ProgressIndicator
                     label="Overall Installation"
@@ -67,6 +66,7 @@ class Execution extends React.Component {
                     percentComplete={this.state.progress} />
             );
         }
+        const css = '.content h2::after { background-color: #0078d4; }';
         return (
             <div className="ms-Grid" dir="ltr">
                 <div className="ms-Grid-row">
@@ -81,6 +81,7 @@ class Execution extends React.Component {
                 <div className="ms-Grid-row content">
                     <div className="ms-Grid-col ms-sm12 ms-lg4">
                         <h2 className="ms-font-xl ms-fontWeight-regular">Third-party Installers</h2>
+                        <style>{css}</style>
                     </div>
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>
@@ -97,4 +98,4 @@ class Execution extends React.Component {
     }
 }
 
-export default Execution;
+export default MacExecution;

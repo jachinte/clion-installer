@@ -1,18 +1,17 @@
 import React from 'react';
-import { ipcRenderer } from 'electron';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib-commonjs/ProgressIndicator';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib-commonjs/MessageBar';
 import { loadTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
 
 const styles = {
     angle: {
-        backgroundColor: '#5c2d91',
+        backgroundColor: '#bad80a',
     },
     button: {
         float: 'right',
     },
     header: {
-        backgroundColor: '#5c2d91',
+        backgroundColor: '#bad80a',
         color: 'white',
     },
     link: {
@@ -28,52 +27,23 @@ const styles = {
     },
 };
 
-const files = [
-    // { label: 'installation scripts', url: 'https://github.com/jachinte/clion-installer/archive/master.zip' },
-    { label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.tar.gz' },
-];
-
-class Download extends React.Component {
+class WindowsExecution extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentStep: '',
             error: false,
-            errorMessage: '',
-            file: '',
             progress: 0,
         };
         loadTheme({
             palette: {
-                'themePrimary': '#5c2d91'
+                'themePrimary': '#bad80a'
             }
         });
     }
 
     componentDidMount() {
-        ipcRenderer.on('download-progress', (event, args) => {
-            this.setState({ progress: args.progress, file: args.file.label });
-        });
-        ipcRenderer.on('download-complete', (event, paths) => {
-            this.props.history.push({
-                pathname: '/extraction',
-                state: { paths }
-            });
-        });
-        ipcRenderer.on('download-error', (event, error) => {
-            this.setState({ error: true, errorMessage: error });
-            this.removeListeners();
-        });
-        ipcRenderer.send('download-files', files);
-    }
 
-    componentWillUnmount() {
-        this.removeListeners();
-    }
-
-    removeListeners() {
-        ipcRenderer.removeAllListeners('download-progress');
-        ipcRenderer.removeAllListeners('download-complete');
-        ipcRenderer.removeAllListeners('download-error');
     }
 
     render() {
@@ -89,21 +59,20 @@ class Download extends React.Component {
                 </MessageBar>
             );
         } else {
-            const progress = this.state.progress ? (this.state.progress * 100).toFixed(0) : 0;
             component = (
                 <ProgressIndicator
-                    description={`Downloading ${this.state.file} (${progress}%)`}
-                    label="Overall Progress"
+                    label="Overall Installation"
+                    description={this.state.currentStep}
                     percentComplete={this.state.progress} />
             );
         }
-        const css = '.content h2::after { background-color: #5c2d91; }';
+        const css = '.content h2::after { background-color: #bad80a; }';
         return (
             <div className="ms-Grid" dir="ltr">
                 <div className="ms-Grid-row">
                     <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
                         <header className="page-header content" style={styles.header}>
-                            <h1 className="ms-font-su title">Prerequisites</h1>
+                            <h1 className="ms-font-su title">Installation</h1>
                         </header>
                         <div className="angle" style={styles.angle}></div>
                     </div>
@@ -111,13 +80,13 @@ class Download extends React.Component {
                 <br />
                 <div className="ms-Grid-row content">
                     <div className="ms-Grid-col ms-sm12 ms-lg4">
-                        <h2 className="ms-font-xl ms-fontWeight-regular">Files Download</h2>
+                        <h2 className="ms-font-xl ms-fontWeight-regular">Third-party Installers</h2>
                         <style>{css}</style>
                     </div>
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>
                             <p>
-                                Please wait while we download the official CLion installer and additional installation scripts.
+                                Please wait while we execute third-party installation software.
                                 This may take a couple of minutes to complete.
                             </p>
                             {component}
@@ -129,4 +98,4 @@ class Download extends React.Component {
     }
 }
 
-export default Download;
+export default WindowsExecution;

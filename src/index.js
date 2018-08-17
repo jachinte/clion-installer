@@ -23,6 +23,7 @@ const createWindow = async () => {
         const paths = new Set();
         const promises = files.map(file =>
             download(mainWindow, file.url, {
+                saveAs: false,
                 onProgress: progress => {
                     event.sender.send('download-progress', {progress, file});
                     if (progress >= 1) {

@@ -38,6 +38,7 @@ class Welcome extends React.Component {
     }
 
     render() {
+        const css = '.content h2::after { background-color: #ff8c00; }';
         return (
             <div className="ms-Grid" dir="ltr">
                 <div className="ms-Grid-row">
@@ -57,6 +58,7 @@ class Welcome extends React.Component {
                 <div className="ms-Grid-row content">
                     <div className="ms-Grid-col ms-sm12 ms-lg4">
                         <h2 className="ms-font-xl ms-fontWeight-regular">CLion 2018 Installer</h2>
+                        <style>{css}</style>
                     </div>
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>

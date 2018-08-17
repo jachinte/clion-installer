@@ -44,17 +44,29 @@ class Extraction extends React.Component {
 
     componentDidMount() {
         this.state.files.forEach(file => {
-            decompress(file, './').then(files => {
-                const _files = this.state.files;
-                const index = _files.indexOf(file);
-                if (index !== -1) {
-                    _files.splice(index, 1);
-                    this.setState({ _files });
-                    if (this.state.files.length === 0) {
-                        this.props.history.push('/execution');
+            decompress(file, './')
+                .then(files => {
+                    const _files = this.state.files;
+                    const index = _files.indexOf(file);
+                    if (index !== -1) {
+                        _files.splice(index, 1);
+                        this.setState({ _files });
+                        if (this.state.files.length === 0) {
+                            var path;
+                            switch (require('os').type()) {
+                                case 'Linux': path = "linux";
+                                    break;
+                                case 'Darwin': path = "mac";
+                                    break;
+                                case 'Windows_NT': path = "windows";
+                                    break;
+                                default: path = "unknown";
+                            }
+                            this.props.history.push(`/${path}`);
+                        }
                     }
-                }
-            });
+                })
+                .catch(error => this.setState({ error: true }));
         });
     }
 
@@ -81,6 +93,7 @@ class Extraction extends React.Component {
                 </div>
             );
         }
+        const css = '.content h2::after { background-color: #5c2d91; }';
         return (
             <div className="ms-Grid" dir="ltr">
                 <div className="ms-Grid-row">
@@ -95,6 +108,7 @@ class Extraction extends React.Component {
                 <div className="ms-Grid-row content">
                     <div className="ms-Grid-col ms-sm12 ms-lg4">
                         <h2 className="ms-font-xl ms-fontWeight-regular">Files Extraction</h2>
+                        <style>{css}</style>
                     </div>
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>
