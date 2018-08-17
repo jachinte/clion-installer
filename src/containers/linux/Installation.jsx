@@ -3,6 +3,7 @@ import { remote } from 'electron';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib-commonjs/ProgressIndicator';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib-commonjs/MessageBar';
 import { loadTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
+import { exec } from 'child_process';
 import sudo from 'sudo-prompt';
 
 const styles = {
@@ -46,16 +47,27 @@ class Installation extends React.Component {
 
     componentDidMount() {
         const directory = 'clion-2017.2.1';
+        const options = { name: 'installer' };
         const commands = [
-            `rm -rf "/opt/${directory}"`,
-            `mv "${remote.app.getAppPath()}/${directory}" /opt`
+            `rm -rf '/opt/${directory}'`,
+            `mv '${remote.app.getAppPath()}/${directory}' /opt`,
         ];
-        commands.forEach(async command => {
-            await sudo.exec(command, {name: 'clion-installer'}, (error, stdout, stderr) => {
-                if (error) {
-                    this.setState({ error: true });
-                }
-            });
+        this.setState({ currentStep: `Moving ${directory} to /opt` });
+        sudo.exec(`sh -c "${commands.join(' && ')}"`, options, (error, stdout, stderr) => {
+            if (error) {
+                this.setState({ error: true });
+            } else {
+                this.setState({ progress: 1/2 });
+                this.setState({ currentStep: `Executing the official CLion installer` });
+                exec(`sh -c "/opt/${directory}/bin/clion.sh"`, (error2, stderr2, stdout2) => {
+                    if (error2) {
+                        this.setState({ error: true });
+                    } else {
+                        this.setState({ progress: 1 });
+                        this.props.history.push('/done');
+                    }
+                });
+            }
         });
     }
 
@@ -68,7 +80,8 @@ class Installation extends React.Component {
                     isMultiline={true}
                     dismissButtonAriaLabel="Close"
                 >
-                    An error has occurred. Please close this installer and try again. If the error persists, please attend office hours.
+                    An error has occurred. Please close this installer and try again.
+                    If the error persists, please attend office hours.
                 </MessageBar>
             );
         } else {
