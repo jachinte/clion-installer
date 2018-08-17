@@ -5,6 +5,7 @@ import Welcome from './containers/Welcome.jsx';
 import Download from './containers/Download.jsx';
 import Extraction from './containers/Extraction.jsx';
 import LinuxInstallation from './containers/linux/Installation';
+import CommandLineTools from './containers/mac/CommandLineTools';
 import MacInstallation from './containers/mac/Installation';
 import WindowsInstallation from './containers/windows/Installation';
 import Done from './containers/Done';
@@ -24,6 +25,7 @@ export default class App extends React.Component {
                     <Route path="/download" component={ Download }/>
                     <Route path="/extraction" component={ Extraction }/>
                     <Route path="/linux" component={ LinuxInstallation }/>
+                    <Route path="/clt" component={ CommandLineTools }/>
                     <Route path="/mac" component={ MacInstallation }/>
                     <Route path="/windows" component={ WindowsInstallation }/>
                     <Route path="/done" component={ Done }/>

@@ -74,7 +74,8 @@ class Installation extends React.Component {
                     isMultiline={true}
                     dismissButtonAriaLabel="Close"
                 >
-                    An error has occurred. Please close this installer and try again. If the error persists, please attend office hours.
+                    An error has occurred. Please close this installer and try again.
+                    If the error persists, please attend office hours.
                 </MessageBar>
             );
         } else {
@@ -99,15 +100,16 @@ class Installation extends React.Component {
                 <br />
                 <div className="ms-Grid-row content">
                     <div className="ms-Grid-col ms-sm12 ms-lg4">
-                        <h2 className="ms-font-xl ms-fontWeight-regular">Third-party Installers</h2>
+                        <h2 className="ms-font-xl ms-fontWeight-regular">Official CLion App</h2>
                         <style>{css}</style>
                     </div>
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>
                             <p>
-                                Please wait while we execute third-party installation software.
+                                Please wait while we process the official CLion installer.
                                 This may take a couple of minutes to complete.
                             </p>
+                            <br />
                             {component}
                         </div>
                     </div>

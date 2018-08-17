@@ -52,7 +52,7 @@ class Download extends React.Component {
                 files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.tar.gz' }];
                 break;
             case 'Darwin':
-                newPath = '/mac';
+                newPath = '/clt';
                 files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.dmg' }];
                 break;
             case 'Windows_NT':
@@ -98,7 +98,8 @@ class Download extends React.Component {
                     isMultiline={true}
                     dismissButtonAriaLabel="Close"
                 >
-                    An error has occurred. Please close this installer and try again. If the error persists, please attend office hours.
+                    An error has occurred. Please close this installer and try again.
+                    If the error persists, please attend office hours.
                 </MessageBar>
             );
         } else {
@@ -133,6 +134,7 @@ class Download extends React.Component {
                                 Please wait while we download the official CLion installer and additional installation scripts.
                                 This may take a couple of minutes to complete.
                             </p>
+                            <br />
                             {component}
                         </div>
                     </div>
