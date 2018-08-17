@@ -29,7 +29,7 @@ const styles = {
     },
 };
 
-class LinuxExecution extends React.Component {
+class Installation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -47,8 +47,8 @@ class LinuxExecution extends React.Component {
     componentDidMount() {
         const directory = 'clion-2017.2.1';
         const commands = [
-            `rm -rf /opt/${directory}`,
-            `mv ${remote.app.getAppPath()}/${directory} /opt`
+            `rm -rf "/opt/${directory}"`,
+            `mv "${remote.app.getAppPath()}/${directory}" /opt`
         ];
         commands.forEach(async command => {
             await sudo.exec(command, {name: 'clion-installer'}, (error, stdout, stderr) => {
@@ -111,4 +111,4 @@ class LinuxExecution extends React.Component {
     }
 }
 
-export default LinuxExecution;
+export default Installation;

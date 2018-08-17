@@ -16,7 +16,7 @@ const styles = {
     },
     link: {
         color: 'white',
-        padding: '10px',
+        padding: '15px',
         paddingLeft: 0,
     },
     nav: {
@@ -48,7 +48,7 @@ class Welcome extends React.Component {
                             <nav style={styles.nav}>
                                 <a href="https://coursespaces.uvic.ca" className="ms-fontWeight-semibold" style={styles.link} target="_blank">CourseSpaces</a>
                                 <a href="https://coursespaces.uvic.ca" className="ms-fontWeight-semibold" style={styles.link} target="_blank">Learn more</a>
-                                <a href="https://coursespaces.uvic.ca" className="ms-fontWeight-semibold" style={styles.link} target="_blank">Other resources</a>
+                                <a href="https://github.com/jachinte/clion-installer-v2" className="ms-fontWeight-semibold" style={styles.link} target="_blank">Source Code</a>
                             </nav>
                         </header>
                         <div className="angle" style={styles.angle}></div>

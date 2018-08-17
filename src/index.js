@@ -9,7 +9,7 @@ let mainWindow;
 const isDevMode = process.execPath.match(/[\\/]electron/);
 if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 
-const createWindow = async () => {
+const createWindow = async() => {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 720,
@@ -19,13 +19,13 @@ const createWindow = async () => {
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-    ipcMain.on('download-files', async (event, files) => {
+    ipcMain.on('download-files', async(event, files) => {
         const paths = new Set();
         const promises = files.map(file =>
             download(mainWindow, file.url, {
                 saveAs: false,
                 onProgress: progress => {
-                    event.sender.send('download-progress', {progress, file});
+                    event.sender.send('download-progress', { progress, file });
                     if (progress >= 1) {
                         // TODO await not working
                         event.sender.send('download-complete', [...paths]);
@@ -55,6 +55,7 @@ const createWindow = async () => {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+
 };
 
 // This method will be called when Electron has finished
@@ -64,11 +65,7 @@ app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+    app.quit();
 });
 
 app.on('activate', () => {

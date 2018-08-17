@@ -28,11 +28,6 @@ const styles = {
     },
 };
 
-const files = [
-    // { label: 'installation scripts', url: 'https://github.com/jachinte/clion-installer/archive/master.zip' },
-    { label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.tar.gz' },
-];
-
 class Download extends React.Component {
     constructor(props) {
         super(props);
@@ -50,12 +45,30 @@ class Download extends React.Component {
     }
 
     componentDidMount() {
+        var newPath = '/extraction';
+        var files;
+        switch (require('os').type()) {
+            case 'Linux':
+                files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.tar.gz' }];
+                break;
+            case 'Darwin':
+                newPath = '/mac';
+                files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.dmg' }];
+                break;
+            case 'Windows_NT':
+                files = [
+                    { label: 'installation scripts', url: 'https://github.com/jachinte/clion-installer/archive/master.zip' },
+                    { label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.exe' }
+                ];
+                break;
+            default: this.setState({ error: true, errorMessage: 'Unsupported operating system' });
+        }
         ipcRenderer.on('download-progress', (event, args) => {
             this.setState({ progress: args.progress, file: args.file.label });
         });
         ipcRenderer.on('download-complete', (event, paths) => {
             this.props.history.push({
-                pathname: '/extraction',
+                pathname: newPath,
                 state: { paths }
             });
         });

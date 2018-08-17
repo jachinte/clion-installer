@@ -5,13 +5,13 @@ import { loadTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
 
 const styles = {
     angle: {
-        backgroundColor: '#0078d4',
+        backgroundColor: '#bad80a',
     },
     button: {
         float: 'right',
     },
     header: {
-        backgroundColor: '#0078d4',
+        backgroundColor: '#bad80a',
         color: 'white',
     },
     link: {
@@ -27,7 +27,7 @@ const styles = {
     },
 };
 
-class MacExecution extends React.Component {
+class Installation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +37,7 @@ class MacExecution extends React.Component {
         };
         loadTheme({
             palette: {
-                'themePrimary': '#0078d4'
+                'themePrimary': '#bad80a'
             }
         });
     }
@@ -66,7 +66,7 @@ class MacExecution extends React.Component {
                     percentComplete={this.state.progress} />
             );
         }
-        const css = '.content h2::after { background-color: #0078d4; }';
+        const css = '.content h2::after { background-color: #bad80a; }';
         return (
             <div className="ms-Grid" dir="ltr">
                 <div className="ms-Grid-row">
@@ -98,4 +98,4 @@ class MacExecution extends React.Component {
     }
 }
 
-export default MacExecution;
+export default Installation;

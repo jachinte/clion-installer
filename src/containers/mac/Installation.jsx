@@ -1,17 +1,18 @@
 import React from 'react';
+import { exec } from 'child_process';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib-commonjs/ProgressIndicator';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib-commonjs/MessageBar';
 import { loadTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
 
 const styles = {
     angle: {
-        backgroundColor: '#bad80a',
+        backgroundColor: '#0078d4',
     },
     button: {
         float: 'right',
     },
     header: {
-        backgroundColor: '#bad80a',
+        backgroundColor: '#0078d4',
         color: 'white',
     },
     link: {
@@ -27,7 +28,7 @@ const styles = {
     },
 };
 
-class WindowsExecution extends React.Component {
+class Installation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,13 +38,31 @@ class WindowsExecution extends React.Component {
         };
         loadTheme({
             palette: {
-                'themePrimary': '#bad80a'
+                'themePrimary': '#0078d4'
             }
         });
     }
 
     componentDidMount() {
-
+        const file = this.props.location.state.paths[0];
+        const commands = [
+            `hdiutil attach "${file}"`,
+            'ditto /Volumes/CLion/CLion.app /Applications/CLion.app',
+            'hdiutil detach /Volumes/CLion/'
+        ];
+        this.setState({ currentStep: 'Mounting CLion.app to /Volumes/CLion/CLion.app' });
+        exec(commands[0], (e, err, std) => {
+            this.setState({ currentStep: 'Copying the application contents to /Applications/CLion.app' });
+            this.setState({ progress: 1/3 });
+            exec(commands[1], (e, err, std) => {
+                this.setState({ currentStep: 'Unmounting /Volumes/CLion/' });
+                this.setState({ progress: 2/3 });
+                exec(commands[2], (e, err, std) => {
+                    this.setState({ progress: 1 });
+                    this.props.history.push('/done');
+                });
+            });
+        });
     }
 
     render() {
@@ -66,7 +85,7 @@ class WindowsExecution extends React.Component {
                     percentComplete={this.state.progress} />
             );
         }
-        const css = '.content h2::after { background-color: #bad80a; }';
+        const css = '.content h2::after { background-color: #0078d4; }';
         return (
             <div className="ms-Grid" dir="ltr">
                 <div className="ms-Grid-row">
@@ -98,4 +117,4 @@ class WindowsExecution extends React.Component {
     }
 }
 
-export default WindowsExecution;
+export default Installation;
