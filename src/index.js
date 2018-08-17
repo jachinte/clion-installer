@@ -14,6 +14,7 @@ const createWindow = async() => {
     mainWindow = new BrowserWindow({
         width: 720,
         height: 400,
+        title: 'CLion 2018 Installation - University of Victoria',
     });
     mainWindow.setFullScreenable(false);
     mainWindow.setResizable(false);
