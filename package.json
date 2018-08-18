@@ -1,8 +1,8 @@
 {
   "name": "clion-installer-v2",
-  "productName": "clion-installer-v2",
+  "productName": "CLion Installation Assistant",
   "version": "1.0.0",
-  "description": "CLion installer for CSC 111 - University of Victoria",
+  "description": "CLion installation assistant for CSC 111 - University of Victoria",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",

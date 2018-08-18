@@ -79,7 +79,8 @@ class Extraction extends React.Component {
                     isMultiline={true}
                     dismissButtonAriaLabel="Close"
                 >
-                    An error has occurred. Please close this installer and try again. If the error persists, please attend office hours.
+                    An error has occurred. Please close this installer and try again.
+                    If the error persists, please attend office hours.
                 </MessageBar>
             );
         } else {
@@ -114,8 +115,11 @@ class Extraction extends React.Component {
                         <div style={styles.secondColumn}>
                             <p>
                                 Please wait while we extract the downloaded files.
+                            </p>
+                            <p>
                                 This may take a couple of minutes to complete.
                             </p>
+                            <br />
                             {component}
                         </div>
                     </div>

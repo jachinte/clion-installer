@@ -132,6 +132,8 @@ class Download extends React.Component {
                         <div style={styles.secondColumn}>
                             <p>
                                 Please wait while we download the official CLion installer and additional installation scripts.
+                            </p>
+                            <p>
                                 This may take a couple of minutes to complete.
                             </p>
                             <br />
