@@ -1,5 +1,4 @@
 import React from 'react';
-import { remote } from 'electron';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib-commonjs/ProgressIndicator';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib-commonjs/MessageBar';
 import { loadTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
@@ -50,7 +49,7 @@ class Installation extends React.Component {
         const options = { name: 'installer' };
         const commands = [
             `rm -rf '/opt/${directory}'`,
-            `mv '${remote.app.getAppPath()}/${directory}' /opt`,
+            `mv '${process.cwd()}/${directory}' /opt`,
         ];
         this.setState({ currentStep: `Moving ${directory} to /opt` });
         sudo.exec(`sh -c "${commands.join(' && ')}"`, options, (error, stdout, stderr) => {
@@ -106,13 +105,16 @@ class Installation extends React.Component {
                 <br />
                 <div className="ms-Grid-row content">
                     <div className="ms-Grid-col ms-sm12 ms-lg4">
-                        <h2 className="ms-font-xl ms-fontWeight-regular">Third-party Installers</h2>
+                        <h2 className="ms-font-xl ms-fontWeight-regular">Official CLion App</h2>
                         <style>{css}</style>
                     </div>
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>
                             <p>
-                                Please wait while we execute third-party installation software.
+                                Please wait while we execute the official CLion installer.
+                                Once you are done with the configuration, please close it to continue.
+                            </p>
+                            <p>
                                 This may take a couple of minutes to complete.
                             </p>
                             {component}
