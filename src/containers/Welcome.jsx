@@ -14,14 +14,6 @@ const styles = {
         backgroundColor: '#ff8c00',
         color: 'white',
     },
-    link: {
-        color: 'white',
-        padding: '15px',
-        paddingLeft: 0,
-    },
-    nav: {
-        padding: '5px 0 0 0',
-    },
     secondColumn: {
         paddingLeft: '40px',
     },
@@ -45,11 +37,6 @@ class Welcome extends React.Component {
                     <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
                         <header className="page-header content" style={styles.header}>
                             <h1 className="ms-font-su title">Welcome</h1>
-                            <nav style={styles.nav}>
-                                <a href="https://coursespaces.uvic.ca" className="ms-fontWeight-semibold" style={styles.link} target="_blank">CourseSpaces</a>
-                                <a href="https://coursespaces.uvic.ca" className="ms-fontWeight-semibold" style={styles.link} target="_blank">Learn more</a>
-                                <a href="https://github.com/jachinte/clion-installer-v2" className="ms-fontWeight-semibold" style={styles.link} target="_blank">Source Code</a>
-                            </nav>
                         </header>
                         <div className="angle" style={styles.angle}></div>
                     </div>
@@ -68,6 +55,7 @@ class Welcome extends React.Component {
                             <p>
                                 Should you encounter issues during the installation, please attend office hours.
                             </p>
+                            <br />
                             <Link to="/download" style={styles.button}>
                                 <ActionButton iconProps={{ iconName: 'DoubleChevronRight8' }}>Start</ActionButton>
                             </Link>
