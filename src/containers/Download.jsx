@@ -1,4 +1,5 @@
 import React from 'react';
+import os from 'os';
 import { ipcRenderer } from 'electron';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib-commonjs/ProgressIndicator';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib-commonjs/MessageBar';
@@ -47,7 +48,7 @@ class Download extends React.Component {
     componentDidMount() {
         var newPath = '/extraction';
         var files;
-        switch (require('os').type()) {
+        switch (os.type()) {
             case 'Linux':
                 files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.tar.gz' }];
                 break;
@@ -56,8 +57,14 @@ class Download extends React.Component {
                 files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.dmg' }];
                 break;
             case 'Windows_NT':
+                var MINGW;
+                if (os.arch() === 'x64') {
+                    MINGW = 'https://sourceforge.net/projects/mingw-w64/files/Toolchains targetting Win32/Personal Builds/mingw-builds/7.1.0/threads-posix/dwarf/i686-7.1.0-release-posix-dwarf-rt_v5-rev1.7z/download';
+                } else {
+                    MINGW = 'https://sourceforge.net/projects/mingw-w64/files/Toolchains targetting Win64/Personal Builds/mingw-builds/7.1.0/threads-posix/seh/x86_64-7.1.0-release-posix-seh-rt_v5-rev1.7z/download';
+                }
                 files = [
-                    { label: 'installation scripts', url: 'https://github.com/jachinte/clion-installer/archive/master.zip' },
+                    { label: `MinGW ${os.arch()}`, url: MINGW },
                     { label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.exe' }
                 ];
                 break;
