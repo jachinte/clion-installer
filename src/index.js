@@ -12,7 +12,7 @@ if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 const createWindow = async() => {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        icon: `${__dirname}/icons/png/icon48x48.png`,
+        icon: `${__dirname}/icons/icon48x48.png`,
         fullscreen: false,
         fullscreenable: false,
         height: 400,

@@ -12,7 +12,13 @@
     "lint": "eslint --cache --color --ext .jsx,.js src"
   },
   "keywords": [],
-  "author": "miguel",
+  "author": {
+    "name": "Miguel Jimenez",
+    "email": "miguel@uvic.ca",
+    "url": "https://migueljimenez.co"
+  },
+  "homepage": "https://github.com/jachinte/clion-installer-v2",
+  "repository": "https://github.com/jachinte/clion-installer-v2",
   "license": "MIT",
   "config": {
     "forge": {
@@ -29,11 +35,12 @@
         ]
       },
       "electronPackagerConfig": {
-      	"icon": "src/icons/icns/icon128x128.icns",
+        "icon": "src/icons/icon128x128",
         "packageManager": "npm"
       },
       "electronWinstallerConfig": {
-        "name": "electron_test_react"
+        "name": "CLionInstallationAssistant",
+        "iconUrl": "file://C:/Users/Miguel/Desktop/clion-installer-v2/src/icons/icon128x128"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
