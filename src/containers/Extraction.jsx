@@ -1,11 +1,11 @@
 import React from 'react';
+import { remote } from 'electron';
 import os from 'os';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib-commonjs/ProgressIndicator';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib-commonjs/MessageBar';
 import { loadTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
 import decompress from 'decompress';
 import { exec } from 'child_process';
-import path from 'path';
 
 const arch = os.arch() === "x64" ? 'x86_64' : 'x86';
 const styles = {
@@ -35,8 +35,11 @@ const styles = {
 class Extraction extends React.Component {
     constructor(props) {
         super(props);
-        const exts = ['bz2', 'bzip2', 'tar', 'tar.bz', 'tar.gz', 'zip', 'unzip', '7z'];
-        const compressedFiles = this.props.location.state.paths.filter(f => exts.indexOf(path.extname(f)));
+        const exts = ['bz2', 'bzip2', 'tar', 'bz', 'gz', 'zip', '7z'];
+        const compressedFiles = this.props.location.state.paths
+            .filter(f => {
+                return exts.indexOf(f.split('.').pop()) !== -1;
+            });
         this.state = {
             error: false,
             files: compressedFiles
@@ -60,15 +63,17 @@ class Extraction extends React.Component {
 
         // 7z files
         this.state.files
-            .filter(f => f.indexOf('.7z') === -1)
+            .filter(f => f.indexOf('.7z') !== -1)
             .forEach(file => {
-                exec(`./assets/util/7za-${arch}.exe`, (error, stderr, stdout) => {
-                    if (error) {
-                        this.setState({ error: true });
-                    } else {
-                        this.onComplete(file);
+                exec(`"${remote.app.getAppPath()}\\src\\assets\\util\\7za-${arch}.exe" x "${file}" -y -o"%SystemDrive%"`,
+                    (error, stderr, stdout) => {
+                        if (error) {
+                            this.setState({ error: true });
+                        } else {
+                            this.onComplete(file);
+                        }
                     }
-                });
+                );
             });
     }
 
