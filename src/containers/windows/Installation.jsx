@@ -50,9 +50,7 @@ class Installation extends React.Component {
             (error, stderr, stdout) => {
                 if (error) {
                     this.setState({ error: true });
-                    console.log(error, stderr, stdout);
                 } else {
-                    console.log(error, stderr, stdout);
                     this.setState({ progress: 1/2 });
                     this.setState({ currentStep: 'Opening the official CLion installer' });
                     exec(`"${this.props.location.state.executable}"`, (error2, stderr2, stdout2) => {
