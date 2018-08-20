@@ -35,12 +35,12 @@
         ]
       },
       "electronPackagerConfig": {
-        "icon": "src/icons/icon128x128",
+        "icon": "src/assets/icons/icon128x128",
         "packageManager": "npm"
       },
       "electronWinstallerConfig": {
         "name": "CLionInstallationAssistant",
-        "iconUrl": "file://C:/Users/Miguel/Desktop/clion-installer-v2/src/icons/icon128x128"
+        "iconUrl": "file://C:/Users/Miguel/Desktop/clion-installer-v2/src/assets/icons/icon128x128"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
