@@ -52,6 +52,8 @@ class Extraction extends React.Component {
     }
 
     componentDidMount() {
+        // Store the executable
+        this.setState({ executable: this.props.location.state.paths.filter(f => f.indexOf('.exe') !== -1)[0] });
         // Compressed files other than 7z
         this.state.files
             .filter(f => f.indexOf('.7z') === -1)
@@ -94,7 +96,10 @@ class Extraction extends React.Component {
                         break;
                     default: path = "unknown";
                 }
-                this.props.history.push(`/${path}`);
+                this.props.history.push({
+                    pathname: `/${path}`,
+                    state: { executable: this.state.executable }
+                });
             }
         }
     }

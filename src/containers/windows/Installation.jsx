@@ -1,7 +1,9 @@
 import React from 'react';
+import { remote } from 'electron';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib-commonjs/ProgressIndicator';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib-commonjs/MessageBar';
 import { loadTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
+import { exec } from 'child_proccess';
 
 const styles = {
     angle: {
@@ -43,7 +45,27 @@ class Installation extends React.Component {
     }
 
     componentDidMount() {
-
+        this.setState({ currentStep: 'Adding executables to the PATH' });
+        exec(`cmd /c ""${remote.app.getAppPath()}\\src\\assets\\util\\pathmgr.bat" /add /y %SystemDrive\\mingw32%\\bin"`,
+            (error, stderr, stdout) => {
+                if (error) {
+                    this.setState({ error: true });
+                    console.log(error, stderr, stdout);
+                } else {
+                    this.setState({ progress: 1/2 });
+                    this.setState({ currentStep: 'Opening the official CLion installer' });
+                    exec(`"${this.props.location.state.executable}"`, (error2, stderr2, stdout2) => {
+                        if (error2) {
+                            this.setState({ error: true });
+                            console.log(error2, stderr2, stdout2);
+                        } else {
+                            this.setState({ progress: 1 });
+                            this.props.history.push('/done');
+                        }
+                    });
+                }
+            }
+        );
     }
 
     render() {
