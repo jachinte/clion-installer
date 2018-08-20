@@ -17,8 +17,8 @@
     "email": "miguel@uvic.ca",
     "url": "https://migueljimenez.co"
   },
-  "homepage": "https://github.com/jachinte/clion-installer-v2",
-  "repository": "https://github.com/jachinte/clion-installer-v2",
+  "homepage": "https://github.com/jachinte/clion-installer",
+  "repository": "https://github.com/jachinte/clion-installer",
   "license": "MIT",
   "config": {
     "forge": {
