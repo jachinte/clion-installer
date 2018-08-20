@@ -50,11 +50,11 @@ class Download extends React.Component {
         var files;
         switch (os.type()) {
             case 'Linux':
-                files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.tar.gz' }];
+                files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2018.2.1.tar.gz' }];
                 break;
             case 'Darwin':
                 newPath = '/clt';
-                files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.dmg' }];
+                files = [{ label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2018.2.1.dmg' }];
                 break;
             case 'Windows_NT':
                 var MINGW;
@@ -65,7 +65,7 @@ class Download extends React.Component {
                 }
                 files = [
                     { label: `MinGW ${os.arch()}`, url: MINGW },
-                    { label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2017.2.1.exe' }
+                    { label: 'CLion 2018', url: 'https://download-cf.jetbrains.com/cpp/CLion-2018.2.1.exe' }
                 ];
                 break;
             default: this.setState({ error: true, errorMessage: 'Unsupported operating system' });
