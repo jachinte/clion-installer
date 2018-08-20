@@ -45,7 +45,7 @@ class Installation extends React.Component {
     }
 
     componentDidMount() {
-        const directory = 'clion-2017.2.1';
+        const directory = 'clion-2018.2.1';
         const options = { name: 'installer' };
         const commands = [
             `rm -rf '/opt/${directory}'`,
