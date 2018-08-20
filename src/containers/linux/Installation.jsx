@@ -111,8 +111,8 @@ class Installation extends React.Component {
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>
                             <p>
-                                Next, we will execute the official CLion installer.
-                                Please configure CLion and close it you are done to continue.
+                                Please follow the steps on the CLion installer.
+                                Once you are done, close it and come back to this window to continue.
                             </p>
                             <br />
                             {component}

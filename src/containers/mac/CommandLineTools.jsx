@@ -121,8 +121,8 @@ class CommandLineTools extends React.Component {
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>
                             <p>
-                                Next, we will install the Command Line Tools.
-                                Please press the button <span className="ms-fontWeight-semibold">Launch installer</span>, and then <span className="ms-fontWeight-semibold">Install</span> in the emergent window.
+                                Next, the Command Line Tools will be installed.
+                                Please press the button <span className="ms-fontWeight-semibold">Launch installer</span>, and then <span className="ms-fontWeight-semibold">Install</span> in the pop-up window.
                             </p>
                             <p>Once it is done, please press the button <span className="ms-fontWeight-semibold">Continue</span>, to resume the CLion installation.</p>
                             {component}

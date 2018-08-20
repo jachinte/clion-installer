@@ -142,13 +142,13 @@ class Extraction extends React.Component {
                 <br />
                 <div className="ms-Grid-row content">
                     <div className="ms-Grid-col ms-sm12 ms-lg4">
-                        <h2 className="ms-font-xl ms-fontWeight-regular">Files Extraction</h2>
+                        <h2 className="ms-font-xl ms-fontWeight-regular">Extract</h2>
                         <style>{css}</style>
                     </div>
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>
                             <p>
-                                Please wait while we extract the downloaded files.
+                                Please wait while the downloaded files are extracted.
                             </p>
                             <p>
                                 This may take a couple of minutes to complete.

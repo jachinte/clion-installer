@@ -51,7 +51,7 @@ class Done extends React.Component {
                     <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
                         <div className="content" style={styles.content}>
                             <header className="page-header">
-                                <h1 className="ms-font-su title">Installation Completed</h1>
+                                <h1 className="ms-font-su title">Installation Complete</h1>
                             </header>
                             <br />
                             <br />

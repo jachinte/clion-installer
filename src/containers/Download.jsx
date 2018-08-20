@@ -132,13 +132,13 @@ class Download extends React.Component {
                 <br />
                 <div className="ms-Grid-row content">
                     <div className="ms-Grid-col ms-sm12 ms-lg4">
-                        <h2 className="ms-font-xl ms-fontWeight-regular">Files Download</h2>
+                        <h2 className="ms-font-xl ms-fontWeight-regular">Download</h2>
                         <style>{css}</style>
                     </div>
                     <div className="ms-Grid-col ms-sm12 ms-lg8">
                         <div style={styles.secondColumn}>
                             <p>
-                                Please wait while we download the official CLion installer and additional installation scripts.
+                                Please wait while the official CLion installer and additional installation scripts are being downloaded.
                             </p>
                             <p>
                                 This may take a couple of minutes to complete.
