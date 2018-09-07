@@ -34,6 +34,7 @@ build/Release
 
 # https://electronforge.io/cli/make
 out/
+dist/
 
 # Dependency directories
 node_modules/

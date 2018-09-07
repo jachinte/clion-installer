@@ -1,5 +1,5 @@
 {
-  "name": "clion-installer-v2",
+  "name": "clion-installation-assistant",
   "productName": "CLion Installation Assistant",
   "version": "1.0.0",
   "description": "CLion installation assistant for CSC 111 - University of Victoria",
@@ -7,6 +7,8 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
+    "postinstall": "electron-builder install-app-deps",
+    "dist": "electron-builder",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --cache --color --ext .jsx,.js src"
@@ -20,6 +22,24 @@
   "homepage": "https://github.com/jachinte/clion-installer",
   "repository": "https://github.com/jachinte/clion-installer",
   "license": "MIT",
+  "build": {
+    "appId": "co.migueljimenez.clion.assistant",
+    "appImage": {
+      "systemIntegration": "doNotAsk"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    },
+    "win": {
+      "target": "portable"
+    },
+    "linux": {
+      "maintainer": "Miguel Jimenez",
+      "vendor": "University of Victoria",
+      "category": "Development",
+      "target": ["AppImage"]
+    }
+  },
   "config": {
     "forge": {
       "make_targets": {
@@ -71,6 +91,7 @@
     "babel-plugin-transform-es2015-classes": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "electron-builder": "^20.28.4",
     "electron-forge": "^5.2.2",
     "electron-prebuilt-compile": "2.0.7",
     "eslint": "^3.19.0",
