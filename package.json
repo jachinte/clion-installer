@@ -37,7 +37,9 @@
       "maintainer": "Miguel Jimenez",
       "vendor": "University of Victoria",
       "category": "Development",
-      "target": ["AppImage"]
+      "target": [
+        "AppImage"
+      ]
     }
   },
   "config": {
@@ -79,6 +81,8 @@
     "electron-compile": "^6.4.3",
     "electron-dl": "^1.12.0",
     "electron-squirrel-startup": "^1.0.0",
+    "hazardous": "^0.3.0",
+    "node-7z-forall": "^1.0.0",
     "office-ui-fabric-react": "^6.49.4",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",

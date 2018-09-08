@@ -1,11 +1,9 @@
 import React from 'react';
-import { remote } from 'electron';
 import os from 'os';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib-commonjs/ProgressIndicator';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib-commonjs/MessageBar';
 import { loadTheme } from 'office-ui-fabric-react/lib-commonjs/Styling';
 import decompress from 'decompress';
-import { exec } from 'child_process';
 
 const arch = os.arch() === "x64" ? 'x86_64' : 'x86';
 const styles = {
@@ -64,18 +62,23 @@ class Extraction extends React.Component {
             });
 
         // 7z files
+        // workaround for using 'path' and app.asar. This is used specifically on Extraction.jsx
+        // read more: https://github.com/epsitec-sa/hazardous
+        require ('hazardous');
+        const zip7z = require('node-7z-forall');
+        const extractor = new zip7z();
         this.state.files
             .filter(f => f.indexOf('.7z') !== -1)
             .forEach(file => {
-                exec(`"${remote.app.getAppPath()}\\src\\assets\\util\\7za-${arch}.exe" x "${file}" -y -o"%SystemDrive%"`,
-                    (error, stderr, stdout) => {
-                        if (error) {
-                            this.setState({ error: true });
-                        } else {
-                            this.onComplete(file);
-                        }
-                    }
-                );
+                extractor.extractFull(file, `${process.env['SystemDrive']}`, {y: true})
+                    // .progress(files => {
+                    //     console.log(files);
+                    // })
+                    .then(() => this.onComplete(file))
+                    .catch(error => {
+                        console.log(error);
+                        this.setState({ error: true });
+                    });
             });
     }
 
