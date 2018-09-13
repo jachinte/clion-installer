@@ -1,5 +1,16 @@
 # CLion Installation Assistant
+
 Multi-platform assistant to facilitate the installation of CLion and its dependencies on Windows, Mac and Linux.
+
+### Screenshots (Mac)
+
+![Welcome](screenshots/welcome.png "Welcome")
+
+![Download](screenshots/download.png "Download")
+
+![Installation](screenshots/installation.png "Installation")
+
+![Done](screenshots/done.png "Done")
 
 ### Executing the assistant
 
@@ -21,6 +32,7 @@ Second, install the dependencies:
 ```bash
 npm install
 ```
+
 And third, run the application:
 
 ```bash
